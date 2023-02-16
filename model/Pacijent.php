@@ -13,15 +13,13 @@ class Doktor
 
     private $izabraniDoktor;
 
-    public function __construct($id=null, $ime, $prezime, $datumRodjenja, $email, $sifra)
+    public function __construct($id=null, $ime, $prezime, $datumRodjenja, $email)
     {
         $this->id = $id;
         $this->ime = $ime;
         $this->prezime = $prezime;
         $this->datumRodjenja = $datumRodjenja;
         $this->email = $email;
-        $this->sifra = $sifra;
-
     }
 
 

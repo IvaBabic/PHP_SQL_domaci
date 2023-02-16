@@ -9,12 +9,11 @@ class Doktor
     private $prezime;
     private $datumRodjenja;
     private $email;
-    private $sifra;
 
     private $specijalizacija;
     private $pacijenti = [];
 
-    public function __construct($id=null, $ime, $prezime, $datumRodjenja, $specijalizacija, $email, $sifra)
+    public function __construct($id=null, $ime, $prezime, $datumRodjenja, $specijalizacija, $email)
     {
         $this->id = $id;
         $this->ime = $ime;
@@ -22,8 +21,6 @@ class Doktor
         $this->datumRodjenja = $datumRodjenja;
         $this->specijalizacija = $specijalizacija;
         $this->email = $email;
-        $this->sifra = $sifra;
-
     }
 
 
