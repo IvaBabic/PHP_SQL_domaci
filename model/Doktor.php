@@ -24,7 +24,10 @@ class Doktor
     }
 
 
-
+    public static function add($ime, $prezime, $datumRodjenja, $specijalizacija, $email, mysqli $conn){
+        $q = "INSERT INTO doktor (ime, prezime, datumRodjenja, specijalizacija, email) VALUES ('$ime', '$prezime', '$datumRodjenja', '$specijalizacija', '$email')";
+        return $conn->query($q);
+    }
     
 
 

@@ -35,7 +35,7 @@ require "controller/controller.php";
     </div>
 
     <div class="col">
-    <button class="btn btn-info" id="btnDodaj" role="button" data-toggle="modal" data-target="#myModal" value="Dodaj doktora" name="Dodajdoktora">Dodaj doktora</button>
+    <button class="btn btn-info" id="btnDodaj" role="button" data-toggle="modal" data-target="#myModal" value="Dodaj doktora" name="btnDodajDoktora">Dodaj doktora</button>
     </div>
 
     <div class="col">
@@ -162,7 +162,6 @@ require "controller/controller.php";
         <div class="modal-dialog">
             <div class="modal-content" style="border: 4px solid blue;">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="container tim-form">
@@ -177,7 +176,7 @@ require "controller/controller.php";
                                         <input type="text" style="border: 1px solid #653428; width:80%" name="prezime" class="form-control" placeholder="Prezime *" value="" />
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" style="border: 1px solid #653428; width:80%" name="datumRodjenja" class="form-control" placeholder="Datum Rodjenja *" value="" />
+                                        <input type="date" style="border: 1px solid #653428; width:80%" name="datumRodjenja" class="form-control" placeholder="Datum Rodjenja *" value="" />
                                     </div>
                                     <div class="form-group">
                                         <input type="text" style="border: 1px solid #653428; width:80%" name="email" class="form-control" placeholder="Email*" value="" />
@@ -186,7 +185,7 @@ require "controller/controller.php";
                                         <input type="text" style="border: 1px solid #653428; width:80%" name="specijalizacija" class="form-control" placeholder="Specijalizacija *" value="" />
                                     </div>
                                     <div class="form-group">
-                                        <button id="btnDodaj" type="submit" class="btn btn-success btn-block" style="background-color: blue; border: 1px solid black; width:80%"><i class="glyphicon glyphicon-plus"></i>Dodaj doktora
+                                        <button id="btnDodajdoktora" type="submit" class="btn btn-success btn-block" style="background-color: blue; border: 1px solid black; width:80%"><i class="glyphicon glyphicon-plus"></i>Dodaj doktora
                                         </button>
                                     </div>
 
@@ -213,7 +212,7 @@ require "controller/controller.php";
                 </div>
                 <div class="modal-body">
                     <div class="container tim-form">
-                        <form action="#" method="post" id="dodajDoktora">
+                        <form action="#" method="post" id="dodajPacijenta">
                             <h3 id="naslov" style="color: black">Dodavanje pacijenta</h3>
                             <div class="row">
                                 <div class="col-md-6">
