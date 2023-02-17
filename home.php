@@ -1,5 +1,11 @@
 <?php
 require "controller/controller.php";
+require "model/dbBroker.php";
+// require "controller/prikaziDoktore.php";
+require "model/Doktor.php";
+
+$result = Doktor::getAll($conn);
+
 ?>
 
 
@@ -27,7 +33,7 @@ require "controller/controller.php";
   <div class="row">
 
     <div class="col">
-    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#myModal2" value="Prikazi sve doktore" id="Prikazi sve doktore" name="PrikaziSveDoktore">Prikazi sve doktore</button>
+    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#myModal2" value="Prikazi sve doktore" id="Prikazisvedoktore" name="PrikaziSveDoktore">Prikazi sve doktore</button>
     </div>
 
     <div class="col">
@@ -83,19 +89,19 @@ require "controller/controller.php";
             <tbody>
                 <?php
                 
-                  //  while($row = $result->fetch_array()){
+                  while($row = $result->fetch_array()){
        
                 ?>
                     <tr>
-                        <td><?php //echo $row['ime'] ?></td>
-                        <td><?php //echo $row['prezime'] ?></td>
-                        <td><?php //echo $row['datumRodjenja'] ?></td>
-                        <td><?php //echo $row['specijalizacija'] ?></td>
-                        <td><?php //echo $row['email'] ?></td>
+                        <td><?php echo $row['ime'] ?></td>
+                        <td><?php echo $row['prezime'] ?></td>
+                        <td><?php echo $row['datumRodjenja'] ?></td>
+                        <td><?php echo $row['specijalizacija'] ?></td>
+                        <td><?php echo $row['email'] ?></td>
 
                     </tr>
                 <?php
-                   // }
+                    }
                 
                 ?>
             </tbody>
