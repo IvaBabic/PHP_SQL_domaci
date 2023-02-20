@@ -49,4 +49,30 @@ $("#dodajDoktora").submit(function (event) {
       console.error("Desila se greska: " + textStatus, error);
     });
   });
+
+  
+  $("#Prikazisvepacijente").submit(function (event) {
+    event.preventDefault();
+    console.log("Pokrenut prikaz pacijenata");
+  
+    request = $.ajax({
+      url: "controller/prikaziPacijente.php",
+      type: "get",
+    });
+  
+    request.done(function (response, textStatus, jqXHR) {
+      if (response === "Success") {
+        alert("Prikazani su pacijenti");
+        location.reload(true);
+      } else {
+        console.log("Pacijenti nisu prikazani" + response);
+      }
+    });
+  
+    request.fail(function (jqXHR, textStatus, error) {
+      console.error("Desila se greska: " + textStatus, error);
+    });
+  });
+
+
   

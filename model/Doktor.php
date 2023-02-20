@@ -9,11 +9,12 @@ class Doktor
     private $prezime;
     private $datumRodjenja;
     private $email;
+    private $sifra;
 
     private $specijalizacija;
     private $pacijenti = [];
 
-    public function __construct($id=null, $ime, $prezime, $datumRodjenja, $specijalizacija, $email)
+    public function __construct($id=null, $ime, $prezime, $datumRodjenja, $specijalizacija, $email, $sifra)
     {
         $this->id = $id;
         $this->ime = $ime;
@@ -21,11 +22,12 @@ class Doktor
         $this->datumRodjenja = $datumRodjenja;
         $this->specijalizacija = $specijalizacija;
         $this->email = $email;
+        $this->sifra = $sifra;
     }
 
 
-    public static function add($ime, $prezime, $datumRodjenja, $specijalizacija, $email, mysqli $conn){
-        $q = "INSERT INTO doktor (ime, prezime, datumRodjenja, specijalizacija, email) VALUES ('$ime', '$prezime', '$datumRodjenja', '$specijalizacija', '$email')";
+    public static function add($ime, $prezime, $datumRodjenja, $specijalizacija, $email, $sifra, mysqli $conn){
+        $q = "INSERT INTO doktor (ime, prezime, datumRodjenja, specijalizacija, email, sifra) VALUES ('$ime', '$prezime', '$datumRodjenja', '$specijalizacija', '$email', '$sifra')";
         return $conn->query($q);
     }
 
@@ -34,8 +36,8 @@ class Doktor
         $result = $conn->query($doktori);
         return $result;
     }
-    
 
+    
 
     // public static function getPacijenti(mysqli $conn)
     // {

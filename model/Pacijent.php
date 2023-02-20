@@ -1,7 +1,7 @@
 <?php
 
 
-class Doktor
+class Pacijent
 {
  
     private $id;
@@ -13,16 +13,41 @@ class Doktor
 
     private $izabraniDoktor;
 
-    public function __construct($id=null, $ime, $prezime, $datumRodjenja, $email)
+    public function __construct($id=null, $ime, $prezime, $datumRodjenja, $email, $sifra)
     {
         $this->id = $id;
         $this->ime = $ime;
         $this->prezime = $prezime;
         $this->datumRodjenja = $datumRodjenja;
         $this->email = $email;
+        $this->sifra = $sifra;
     }
 
+    public static function add($ime, $prezime, $datumRodjenja, $email, $sifra, $doktorID, mysqli $conn){
+        $q = "INSERT INTO pacijent (ime, prezime, datumRodjenja, email, sifra, doktor_id) VALUES ('$ime', '$prezime', '$datumRodjenja', '$email', '$sifra', $doktorID)";
+        return $conn->query($q);
+    }
 
+    public static function getAll(mysqli $conn){
+        $q = "SELECT * FROM pacijent";
+        $pacijenti= $conn->query($q);
+        return $pacijenti;
+    }
+
+    public static function doktorID($doktor, mysqli $conn){
+        $query = "SELECT id FROM doktor WHERE CONCAT(ime, ' ', prezime) = '$doktor';";
+        $result = $conn->query($query);
+        $row = $result->fetch_assoc();
+        $doktorID = $row['id'];
+        return $doktorID;
+    }
+
+    // public static function izaberiDoktora($doktorID, mysqli $conn){
+       
+    //     $q = "INSERT INTO pacijent (doktor_id) VALUES ($doktorID)";
+    //     return $conn->query($q);
+        
+    // }
 
     
 

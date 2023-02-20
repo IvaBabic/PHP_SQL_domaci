@@ -1,10 +1,11 @@
 <?php
 require "controller/controller.php";
 require "model/dbBroker.php";
-// require "controller/prikaziDoktore.php";
 require "model/Doktor.php";
+require "model/Pacijent.php";
 
 $result = Doktor::getAll($conn);
+$pacijenti = Pacijent::getAll($conn);
 
 ?>
 
@@ -37,7 +38,7 @@ $result = Doktor::getAll($conn);
     </div>
 
     <div class="col">
-    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#myModal3" value="Prikazi sve pacijente" id="Prikazi sve pacijente" name="PrikaziSvePacijente">Prikazi sve pacijente</button>
+    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#myModal3" value="Prikazi sve pacijente" id="Prikazisvepacijente" name="PrikaziSvePacijente">Prikazi sve pacijente</button>
     </div>
 
     <div class="col">
@@ -45,7 +46,7 @@ $result = Doktor::getAll($conn);
     </div>
 
     <div class="col">
-    <button class="btn btn-info" id="btnDodajPacijenta" role="button" data-toggle="modal" data-target="#myModal1" value="Dodaj pacijenta" name="Dodajpacijenta">Dodaj pacijenta</button>
+    <button class="btn btn-info" id="btnDodajPacijenta" role="button" onclick="window.location.href = 'DodajPacijenta.php';" value="Dodaj pacijenta" name="dugmeDodajpacijenta">Dodaj pacijenta</button>
 
     </div>
 
@@ -66,6 +67,7 @@ $result = Doktor::getAll($conn);
     </div> --> 
 </div>
 </div>
+
 
     <!-- FORMA ZA PRIKAZIVANJE DOKTORA -->
 
@@ -137,19 +139,19 @@ $result = Doktor::getAll($conn);
             <tbody>
                 <?php
                 
-                  //  while($row = $result->fetch_array()){
+                   while($row = $pacijenti->fetch_array()){
        
                 ?>
                     <tr>
-                        <td><?php //echo $row['ime'] ?></td>
-                        <td><?php //echo $row['prezime'] ?></td>
-                        <td><?php //echo $row['datumRodjenja'] ?></td>
-                        <td><?php //echo $row['email'] ?></td>
+                        <td><?php echo $row['ime'] ?></td>
+                        <td><?php echo $row['prezime'] ?></td>
+                        <td><?php echo $row['datumRodjenja'] ?></td>
+                        <td><?php echo $row['email'] ?></td>
                         <td><?php //echo $row['izabraniLekar'] ?></td>
 
                     </tr>
                 <?php
-                   // }
+                    }
                 
                 ?>
             </tbody>
@@ -176,19 +178,22 @@ $result = Doktor::getAll($conn);
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" style="border: 1px solid #653428; width:80%" name="ime" class="form-control" placeholder="Ime *" value="" />
+                                        <input type="text" style="border: 1px solid #653428; width:80%" name="ime" class="form-control" placeholder="Ime *" value="" required/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" style="border: 1px solid #653428; width:80%" name="prezime" class="form-control" placeholder="Prezime *" value="" />
+                                        <input type="text" style="border: 1px solid #653428; width:80%" name="prezime" class="form-control" placeholder="Prezime *" value="" required/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="date" style="border: 1px solid #653428; width:80%" name="datumRodjenja" class="form-control" placeholder="Datum Rodjenja *" value="" />
+                                        <input type="date" style="border: 1px solid #653428; width:80%" name="datumRodjenja" class="form-control" placeholder="Datum Rodjenja *" value="" required/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" style="border: 1px solid #653428; width:80%" name="email" class="form-control" placeholder="Email*" value="" />
+                                        <input type="text" style="border: 1px solid #653428; width:80%" name="email" class="form-control" placeholder="Email*" value="" required/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" style="border: 1px solid #653428; width:80%" name="specijalizacija" class="form-control" placeholder="Specijalizacija *" value="" />
+                                        <input type="text" style="border: 1px solid #653428; width:80%" name="sifra" class="form-control" placeholder="sifra*" value="" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" style="border: 1px solid #653428; width:80%" name="specijalizacija" class="form-control" placeholder="Specijalizacija *" value="" required/>
                                     </div>
                                     <div class="form-group">
                                         <button id="btnDodajdoktora" type="submit" class="btn btn-success btn-block" style="background-color: blue; border: 1px solid black; width:80%"><i class="glyphicon glyphicon-plus"></i>Dodaj doktora
@@ -210,33 +215,35 @@ $result = Doktor::getAll($conn);
     </div>
 
     <!-- FORMA ZA DODAVANJE PACIJENTA -->
-<div class="modal fade" id="myModal1" role="dialog">
+
+    <div class="modal fade" id="myModal1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content" style="border: 4px solid blue;">
                 <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <div class="container tim-form">
-                        <form action="#" method="post" id="dodajPacijenta">
+                        <form action="#" method="post" id="m3">
                             <h3 id="naslov" style="color: black">Dodavanje pacijenta</h3>
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <input type="text" style="border: 1px solid #653428; width:80%" name="ime" class="form-control" placeholder="Ime *" value="" />
+                                        <input type="text" style="border: 1px solid #653428; width:80%" name="ime" class="form-control" placeholder="Ime *" value="" required/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" style="border: 1px solid #653428; width:80%" name="prezime" class="form-control" placeholder="Prezime *" value="" />
+                                        <input type="text" style="border: 1px solid #653428; width:80%" name="prezime" class="form-control" placeholder="Prezime *" value="" required/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" style="border: 1px solid #653428; width:80%" name="datumRodjenja" class="form-control" placeholder="Datum Rodjenja *" value="" />
+                                        <input type="date" style="border: 1px solid #653428; width:80%" name="datumRodjenja" class="form-control" placeholder="Datum Rodjenja *" value="" required/>
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" style="border: 1px solid #653428; width:80%" name="email" class="form-control" placeholder="Email*" value="" />
+                                        <input type="text" style="border: 1px solid #653428; width:80%" name="email" class="form-control" placeholder="Email*" value="" required/>
                                     </div>
-                        
                                     <div class="form-group">
-                                        <button id="btnDodaj" type="submit" class="btn btn-success btn-block" style="background-color: blue; border: 1px solid black; width:80%"><i class="glyphicon glyphicon-plus"></i>Dodaj pacijenta
+                                        <input type="text" style="border: 1px solid #653428; width:80%" name="sifra" class="form-control" placeholder="sifra*" value="" required/>
+                                    </div>
+                                    <div class="form-group">
+                                        <button id="btnDodajpacijenta" type="submit" class="btn btn-success btn-block" style="background-color: blue; border: 1px solid black; width:80%"><i class="glyphicon glyphicon-plus"></i>Dodaj pacijenta
                                         </button>
                                     </div>
 
@@ -253,6 +260,65 @@ $result = Doktor::getAll($conn);
             </div>
         </div>
     </div>
+
+     <!-- FORMA ZA ODABIR DOKTORA -->
+<div class="modal fade" id="myModalIzaberiD" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content" style="border: 4px solid blue;">
+                <div class="modal-header">
+                </div>
+                <div class="modal-body">
+                    <div class="container tim-form">
+                        <form action="#" method="post" id="izaberiDoktora">
+                            <h3 id="naslov" style="color: black">Izaberi doktora</h3>
+                            <table class="table" id="tabela">
+            <thead>
+                <tr>
+                    <th>Ime</th>
+                    <th>Prezime</th>
+                    <th>Datum Rodjenja</th>
+                    <th>Specijalizacija</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php
+                
+                  while($row = $result->fetch_array()){
+       
+                ?>
+                    <tr>
+                        <td><?php echo $row['ime'] ?></td>
+                        <td><?php echo $row['prezime'] ?></td>
+                        <td><?php echo $row['datumRodjenja'] ?></td>
+                        <td><?php echo $row['specijalizacija'] ?></td>
+                        <td><?php echo $row['email'] ?></td>
+
+                    </tr>
+                <?php
+                    }
+                
+                ?>
+            </tbody>
+        </table>
+
+                                    <div class="form-group">
+                                        <button id="btnIzaberiDoktora" type="submit" class="btn btn-success btn-block" style="background-color: blue; border: 1px solid black; width:80%"><i class="glyphicon glyphicon-plus"></i>Izaberi doktora
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>      
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" style="color: white; background-color: blue; border: 1px solid black" data-dismiss="modal">Zatvori</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <!-- FORMA ZA BRISANJE -->
 
