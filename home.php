@@ -139,7 +139,7 @@ $pacijenti = Pacijent::getAll($conn);
             <tbody>
                 <?php
                 
-                   while($row = $pacijenti->fetch_array()){
+                   while($row = $pacijenti->fetch_assoc()){
        
                 ?>
                     <tr>
@@ -147,7 +147,7 @@ $pacijenti = Pacijent::getAll($conn);
                         <td><?php echo $row['prezime'] ?></td>
                         <td><?php echo $row['datumRodjenja'] ?></td>
                         <td><?php echo $row['email'] ?></td>
-                        <td><?php //echo $row['izabraniLekar'] ?></td>
+                        <td><?php echo $row['doktor_punoIme'] ?></td>
 
                     </tr>
                 <?php

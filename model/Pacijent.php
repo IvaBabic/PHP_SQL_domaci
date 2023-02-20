@@ -29,7 +29,7 @@ class Pacijent
     }
 
     public static function getAll(mysqli $conn){
-        $q = "SELECT * FROM pacijent";
+        $q = "SELECT pacijent.ime, pacijent.prezime, pacijent.datumRodjenja, pacijent.email, CONCAT(doktor.ime, ' ', doktor.prezime) as doktor_punoIme FROM pacijent INNER JOIN doktor ON pacijent.doktor_id = doktor.id;";
         $pacijenti= $conn->query($q);
         return $pacijenti;
     }
@@ -41,6 +41,7 @@ class Pacijent
         $doktorID = $row['id'];
         return $doktorID;
     }
+
 
     // public static function izaberiDoktora($doktorID, mysqli $conn){
        
