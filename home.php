@@ -51,8 +51,9 @@ $pacijenti = Pacijent::getAll($conn);
     </div>
 
     <div class="col">
-    <button type="submit" class="btn btn-info" data-toggle="modal" data-target="#myModal4" value="Obrisi" id="Obrisi" name="Obrisi">Obrisi</button>
+    <button type="submit" class="btn btn-info" role="button" onclick="window.location.href = 'Obrisi.php';" value="Obrisi" id="Obrisi" name="Obrisi">Obrisi</button>
     </div>
+
 
     <div class="col">
     <button type="submit" class="btn btn-info" id="imePretraga" data-toggle="modal" data-target="#myModal5"name="ime" placeholder="Pretrazi po imenu/prezimenu *" value="" >Pretrazi po imenu/prezimenu</button>
@@ -216,7 +217,7 @@ $pacijenti = Pacijent::getAll($conn);
 
     <!-- FORMA ZA DODAVANJE PACIJENTA -->
 
-    <div class="modal fade" id="myModal1" role="dialog">
+    <!-- <div class="modal fade" id="myModal1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content" style="border: 4px solid blue;">
                 <div class="modal-header">
@@ -259,10 +260,10 @@ $pacijenti = Pacijent::getAll($conn);
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
      <!-- FORMA ZA ODABIR DOKTORA -->
-<div class="modal fade" id="myModalIzaberiD" role="dialog">
+<!-- <div class="modal fade" id="myModalIzaberiD" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content" style="border: 4px solid blue;">
                 <div class="modal-header">
@@ -316,12 +317,12 @@ $pacijenti = Pacijent::getAll($conn);
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
 
 
 
     <!-- FORMA ZA BRISANJE -->
-
+<!-- 
     <div class="modal fade" id="myModal4" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -336,36 +337,47 @@ $pacijenti = Pacijent::getAll($conn);
                     <th>Ime</th>
                     <th>Prezime</th>
                     <th>Tip</th>
+                    <th> <button role="button" class="btn btn-info" id="btn-obrisi">Obrisi</button>
+</th>
+
 
                 </tr>
             </thead>
             <tbody>
-                
+            <?php
+                $q = "SELECT doktor.id, doktor.ime, doktor.prezime, doktor.tip FROM doktor UNION ALL SELECT pacijent.id, pacijent.ime, pacijent.prezime, pacijent.tip FROM pacijent;";
+                $osobe = $conn->query($q);
+                while($row = $osobe->fetch_assoc()){                                                              
+             ?>
                     <tr>
-                        <td>Id</td>
-                        <td>Ime</td>
-                        <td>Prezime</td>
-                        <td>Doktor/Pacijent</td>
+                        <td><?php echo $row['id']; ?></td>
+                        <td><?php echo $row['ime']; ?></td>
+                        <td><?php echo $row['prezime']; ?></td>
+                        <td><?php echo $row['tip'];   ?></td>
+
                         <td class="celija">
                             <label class="radio-btn">
-                                <!-- dodati id doktora/pacijenta -->
-                                <input type="radio" class="radio" name="checked-donut" value="1">
+                                <input type="radio" class="radio" name="checked-donut" value=<?php echo $row['id']. $row['tip']; ?>>
                                 <span class="checkmark"></span>
                             </label>
                         </td>
 
                     </tr>
+                    <?php
+                    }
                 
+                ?>
             </tbody>
         </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>
         </div>
       </div>
     </div>
   </div>
-</div>
+</div> -->
+
 
 <!-- FORMA ZA PRETRAGU -->
 

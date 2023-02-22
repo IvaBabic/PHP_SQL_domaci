@@ -75,4 +75,32 @@ $("#dodajDoktora").submit(function (event) {
   });
 
 
+
+  // $("#btn-obrisi").click(function (event) {
+  //   event.preventDefault();
+  //   console.log('registruje');
+  //   // console.log("Pokrenuto brisanje");
+  
+  //   // const polje = $("input[type=radio]:checked");
+  
+  //   // request = $.ajax({
+  //   //   url: "controller/obrisi.php",
+  //   //   type: "post",
+  //   //   data: { id: polje.val() },
+  //   // });
+  
+  //   // request.done(function (response, textStatus, jqXHR) {
+  //   //   if (response === "Success") {
+  //   //     alert("Doktor/Pacijent obrisan");
+  //   //     location.reload(true);
+  //   //   } else {
+  //   //     console.log("Doktor/Pacijent nije obrisan" + response);
+  //   //   }
+  //   // });
+  
+  //   // request.fail(function (jqXHR, textStatus, error) {
+  //   //   console.error("Desila se greska: " + textStatus, error);
+  //   // });
+  // });
+
   

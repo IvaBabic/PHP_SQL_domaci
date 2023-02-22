@@ -10,11 +10,11 @@ class Doktor
     private $datumRodjenja;
     private $email;
     private $sifra;
+    private $tip;
 
     private $specijalizacija;
-    private $pacijenti = [];
 
-    public function __construct($id=null, $ime, $prezime, $datumRodjenja, $specijalizacija, $email, $sifra)
+    public function __construct($id=null, $ime, $prezime, $datumRodjenja, $specijalizacija, $email, $sifra, $tip = 'doktor')
     {
         $this->id = $id;
         $this->ime = $ime;
@@ -23,6 +23,7 @@ class Doktor
         $this->specijalizacija = $specijalizacija;
         $this->email = $email;
         $this->sifra = $sifra;
+        $this->tip = $tip;
     }
 
 
@@ -35,6 +36,11 @@ class Doktor
         $doktori = "SELECT * FROM doktor";
         $result = $conn->query($doktori);
         return $result;
+    }
+
+    public static function deleteById($id, mysqli $conn){
+        $q = "DELETE FROM doktor WHERE id=$id";
+        return $conn->query($q);
     }
 
     

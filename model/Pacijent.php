@@ -10,10 +10,11 @@ class Pacijent
     private $datumRodjenja;
     private $email;
     private $sifra;
+    private $tip;
 
     private $izabraniDoktor;
 
-    public function __construct($id=null, $ime, $prezime, $datumRodjenja, $email, $sifra)
+    public function __construct($id=null, $ime, $prezime, $datumRodjenja, $email, $sifra, $tip = 'pacijent')
     {
         $this->id = $id;
         $this->ime = $ime;
@@ -21,6 +22,7 @@ class Pacijent
         $this->datumRodjenja = $datumRodjenja;
         $this->email = $email;
         $this->sifra = $sifra;
+        $this->tip = $tip;
     }
 
     public static function add($ime, $prezime, $datumRodjenja, $email, $sifra, $doktorID, mysqli $conn){
@@ -40,6 +42,11 @@ class Pacijent
         $row = $result->fetch_assoc();
         $doktorID = $row['id'];
         return $doktorID;
+    }
+
+    public static function deleteById($id, mysqli $conn){
+        $q = "DELETE FROM pacijent WHERE id=$id";
+        return $conn->query($q);
     }
 
 
