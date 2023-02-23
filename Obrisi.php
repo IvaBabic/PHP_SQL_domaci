@@ -95,7 +95,7 @@ if (isset($_POST['submit'])) {
         </table>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>
+          <button type="button" class="btn btn-default" onclick="window.location.href = 'home.php';" data-dismiss="modal">Zatvori</button>
         </div>
       </div>
    

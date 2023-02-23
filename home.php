@@ -56,7 +56,7 @@ $pacijenti = Pacijent::getAll($conn);
 
 
     <div class="col">
-    <button type="submit" class="btn btn-info" id="imePretraga" data-toggle="modal" data-target="#myModal5"name="ime" placeholder="Pretrazi po imenu/prezimenu *" value="" >Pretrazi po imenu/prezimenu</button>
+    <button type="submit" class="btn btn-info" id="imePretraga" onclick="window.location.href = 'Pretrazi.php';" name="ime" placeholder="Pretrazi po imenu/prezimenu *" value="" >Pretrazi po imenu/prezimenu</button>
     </div>
 
     <!-- <div class="col">
@@ -380,7 +380,7 @@ $pacijenti = Pacijent::getAll($conn);
 
 
 <!-- FORMA ZA PRETRAGU -->
-
+<!-- 
 <div class="modal fade" id="myModal5" role="dialog">
     <div class="modal-dialog modal-lg">
       <div class="modal-content">
@@ -388,7 +388,16 @@ $pacijenti = Pacijent::getAll($conn);
           <h4 class="modal-title">Pretraga</h4>
         </div>
         <div class="modal-body">
-        <input type="text" id="imePretraga" style="border: 1px solid #653428" name="ime" class="form-control" placeholder="Pretrazi po imenu *" value="" />
+        <form action="" method="post">
+                            <input type="text" id="imePretraga" style="border: 1px solid #653428" name="pretraga" class="form-control" placeholder="Pretrazi po imenu *" value="" />
+                            <input type="submit" id="pretrazi" name="submit" />
+        </form>
+
+        <table id="tabela">
+
+        </table>
+
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -396,7 +405,7 @@ $pacijenti = Pacijent::getAll($conn);
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
