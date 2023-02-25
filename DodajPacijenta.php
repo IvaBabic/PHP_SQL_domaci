@@ -7,11 +7,17 @@ require "model/Pacijent.php";
 $result = Doktor::getAll($conn);
 $pacijenti = Pacijent::getAll($conn);
 
-if(isset($_POST['ime']) && isset($_POST['prezime']) && isset($_POST['datumRodjenja']) && isset($_POST['email']) && isset($_POST['sifra']) && isset($_POST['izabraniDoktor'])){
-    //include "controller/dodajPacijenta.php";
+if(isset($_POST['ime']) && isset($_POST['prezime']) && isset($_POST['datumRodjenja']) && isset($_POST['email']) && isset($_POST['sifra']) && isset($_POST['doktor'])){
 
-    $doktorID = Pacijent::doktorID($_POST['izabraniDoktor'], $conn);
-    Pacijent::add($_POST['ime'], $_POST['prezime'], $_POST['datumRodjenja'], $_POST['email'], $_POST['sifra'], $doktorID, $conn);
+   $status = Pacijent::add($_POST['ime'], $_POST['prezime'], $_POST['datumRodjenja'], $_POST['email'], $_POST['sifra'], $_POST['doktor'], $conn);
+
+   if($status){
+    echo("<script>alert('Pacijent dodat!')</script>");
+    echo("<script>window.location = 'home.php';</script>");
+} else{
+echo $status;
+echo "Failed";
+}
 }
 ?>
 
@@ -56,39 +62,23 @@ if(isset($_POST['ime']) && isset($_POST['prezime']) && isset($_POST['datumRodjen
                                         <input type="text" style="border: 1px solid #653428; width:80%" name="sifra" class="form-control" placeholder="sifra*" value="" required/>
                                     </div>
 
+                            <!-- dropdown menu -->
                                     <div class="form-group">
-                                        <input type="text" style="border: 1px solid #653428; width:80%" name="izabraniDoktor" class="form-control" placeholder="Unesite ime i prezime doktora kojeg birate" value="" required/>
-                                        <table class="table" id="tabela">
-                                            <thead>
-                                                <tr>
-                                                    <th>Ime</th>
-                                                    <th>Prezime</th>
-                                                    <th>Datum Rodjenja</th>
-                                                    <th>Specijalizacija</th>
-                                                    <th>Email</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php
-                                                
-                                                while($row = $result->fetch_array()){
-                                    
+                                        <label for="">Izaberi doktora sa liste</label>
+                                        <select id="odabirDoktor" name="doktor">
+                                                 <?php
+                                                 while($row = $result->fetch_array()){
+                                                                
                                                 ?>
-                                                    <tr>
-                                                        <td><?php echo $row['ime'] ?></td>
-                                                        <td><?php echo $row['prezime'] ?></td>
-                                                        <td><?php echo $row['datumRodjenja'] ?></td>
-                                                        <td><?php echo $row['specijalizacija'] ?></td>
-                                                        <td><?php echo $row['email'] ?></td>
-
-                                                    </tr>
-                                                <?php
-                                                    }
-                                                
-                                                ?>
-                                            </tbody>
-                                        </table>
+                                        <option value=" <?php echo $row['id'] ?>"><?php echo $row['ime'] . " " . $row['prezime'] . "," . $row['specijalizacija']?> </option>
+                                              <?php
+                                               }
+                                              ?>
+                                        </select>
                                     </div>
+                            <!-- dropdown menu kraj -->
+
+                                 
 
                                     <div class="form-group">
                                         <button id="btnDodajpacijenta" type="submit" class="btn btn-success btn-block" style="background-color: blue; border: 1px solid black; width:80%"><i class="glyphicon glyphicon-plus"></i>Dodaj pacijenta

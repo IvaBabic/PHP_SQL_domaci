@@ -99,7 +99,7 @@ $pacijenti = Pacijent::getAll($conn);
                         <td><?php echo $row['email'] ?></td>
 
                         <td>
-                        <form action="izmeni.php" method="post">
+                        <form action="izmeniDoktora.php" method="post">
                             <input type="radio" name="izmeni" value="<?php echo $row['id'] ?>">
                             <input type="submit" name="submit" />
                         </form>
@@ -139,6 +139,8 @@ $pacijenti = Pacijent::getAll($conn);
                     <th>Datum Rodjenja</th>
                     <th>Email</th>
                     <th>Izabrani lekar</th>
+                    <th>Izmeni</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -153,6 +155,13 @@ $pacijenti = Pacijent::getAll($conn);
                         <td><?php echo $row['datumRodjenja'] ?></td>
                         <td><?php echo $row['email'] ?></td>
                         <td><?php echo $row['doktor_punoIme'] ?></td>
+
+                        <td>
+                        <form action="izmeniPacijenta.php" method="post">
+                            <input type="radio" name="izmeni" value="<?php echo $row['id'] ?>">
+                            <input type="submit" name="submit" />
+                        </form>
+                        </td>
 
                     </tr>
                 <?php
@@ -219,197 +228,6 @@ $pacijenti = Pacijent::getAll($conn);
         </div>
     </div>
 
-    <!-- FORMA ZA DODAVANJE PACIJENTA -->
-
-    <!-- <div class="modal fade" id="myModal1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content" style="border: 4px solid blue;">
-                <div class="modal-header">
-                </div>
-                <div class="modal-body">
-                    <div class="container tim-form">
-                        <form action="#" method="post" id="m3">
-                            <h3 id="naslov" style="color: black">Dodavanje pacijenta</h3>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        <input type="text" style="border: 1px solid #653428; width:80%" name="ime" class="form-control" placeholder="Ime *" value="" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" style="border: 1px solid #653428; width:80%" name="prezime" class="form-control" placeholder="Prezime *" value="" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="date" style="border: 1px solid #653428; width:80%" name="datumRodjenja" class="form-control" placeholder="Datum Rodjenja *" value="" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" style="border: 1px solid #653428; width:80%" name="email" class="form-control" placeholder="Email*" value="" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="text" style="border: 1px solid #653428; width:80%" name="sifra" class="form-control" placeholder="sifra*" value="" required/>
-                                    </div>
-                                    <div class="form-group">
-                                        <button id="btnDodajpacijenta" type="submit" class="btn btn-success btn-block" style="background-color: blue; border: 1px solid black; width:80%"><i class="glyphicon glyphicon-plus"></i>Dodaj pacijenta
-                                        </button>
-                                    </div>
-
-                                </div>
-
-
-                            </div>
-                        </form>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" style="color: white; background-color: blue; border: 1px solid black" data-dismiss="modal">Zatvori</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-     <!-- FORMA ZA ODABIR DOKTORA -->
-<!-- <div class="modal fade" id="myModalIzaberiD" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content" style="border: 4px solid blue;">
-                <div class="modal-header">
-                </div>
-                <div class="modal-body">
-                    <div class="container tim-form">
-                        <form action="#" method="post" id="izaberiDoktora">
-                            <h3 id="naslov" style="color: black">Izaberi doktora</h3>
-                            <table class="table" id="tabela">
-            <thead>
-                <tr>
-                    <th>Ime</th>
-                    <th>Prezime</th>
-                    <th>Datum Rodjenja</th>
-                    <th>Specijalizacija</th>
-                    <th>Email</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                
-                  while($row = $result->fetch_array()){
-       
-                ?>
-                    <tr>
-                        <td><?php echo $row['ime'] ?></td>
-                        <td><?php echo $row['prezime'] ?></td>
-                        <td><?php echo $row['datumRodjenja'] ?></td>
-                        <td><?php echo $row['specijalizacija'] ?></td>
-                        <td><?php echo $row['email'] ?></td>
-
-                    </tr>
-                <?php
-                    }
-                
-                ?>
-            </tbody>
-        </table>
-
-                                    <div class="form-group">
-                                        <button id="btnIzaberiDoktora" type="submit" class="btn btn-success btn-block" style="background-color: blue; border: 1px solid black; width:80%"><i class="glyphicon glyphicon-plus"></i>Izaberi doktora
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>      
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" style="color: white; background-color: blue; border: 1px solid black" data-dismiss="modal">Zatvori</button>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
-
-
-    <!-- FORMA ZA BRISANJE -->
-<!-- 
-    <div class="modal fade" id="myModal4" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Brisanje doktora/pacijenta</h4>
-        </div>
-        <div class="modal-body">
-        <table class="table" id="tabela">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Ime</th>
-                    <th>Prezime</th>
-                    <th>Tip</th>
-                    <th> <button role="button" class="btn btn-info" id="btn-obrisi">Obrisi</button>
-</th>
-
-
-                </tr>
-            </thead>
-            <tbody>
-            <?php
-                $q = "SELECT doktor.id, doktor.ime, doktor.prezime, doktor.tip FROM doktor UNION ALL SELECT pacijent.id, pacijent.ime, pacijent.prezime, pacijent.tip FROM pacijent;";
-                $osobe = $conn->query($q);
-                while($row = $osobe->fetch_assoc()){                                                              
-             ?>
-                    <tr>
-                        <td><?php echo $row['id']; ?></td>
-                        <td><?php echo $row['ime']; ?></td>
-                        <td><?php echo $row['prezime']; ?></td>
-                        <td><?php echo $row['tip'];   ?></td>
-
-                        <td class="celija">
-                            <label class="radio-btn">
-                                <input type="radio" class="radio" name="checked-donut" value=<?php echo $row['id']. $row['tip']; ?>>
-                                <span class="checkmark"></span>
-                            </label>
-                        </td>
-
-                    </tr>
-                    <?php
-                    }
-                
-                ?>
-            </tbody>
-        </table>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Zatvori</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
-
-
-<!-- FORMA ZA PRETRAGU -->
-<!-- 
-<div class="modal fade" id="myModal5" role="dialog">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Pretraga</h4>
-        </div>
-        <div class="modal-body">
-        <form action="" method="post">
-                            <input type="text" id="imePretraga" style="border: 1px solid #653428" name="pretraga" class="form-control" placeholder="Pretrazi po imenu *" value="" />
-                            <input type="submit" id="pretrazi" name="submit" />
-        </form>
-
-        <table id="tabela">
-
-        </table>
-
-
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div> -->
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -418,35 +236,3 @@ $pacijenti = Pacijent::getAll($conn);
 </body>
 </html>
 
-
-
-<?php
-
-
-// if (isset($_POST["PrikaziSveDoktore"])) {
-//     foreach ($nizOsoba as $dr) {
-//         if ($dr->getNameOfClass() == "Doktor") {
-//        Kontroler::prikaziPodatke($dr);
-//             echo "<br>";
-//         }
-//     }
-// }
-
-
-// if (isset($_POST["PrikaziSvePacijente"])) {
-//     foreach ($nizOsoba as $p) {
-//         if ($p->getNameOfClass() == "odrasliPacijent" || $p->getNameOfClass() == "detePacijent" ) {
-//        Kontroler::prikaziPodatke($p);
-//             echo "<br>";
-//         }
-//     }
-// }
-
-// if (isset($_POST["Odjavise"])) {
-//     header("Location: ../../index.php"); 
-//     }
-
-
-  
-
-?>

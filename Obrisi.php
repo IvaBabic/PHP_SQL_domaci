@@ -23,7 +23,7 @@ if (isset($_POST['submit'])) {
                     }
 
                     if($status){
-                        echo 'Osoba je obrisana';
+                        echo("<script>alert('Osoba je obrisana!')</script>");
                     } else{
                         echo $status;
                         echo "Failed";

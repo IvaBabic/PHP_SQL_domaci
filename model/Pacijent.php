@@ -31,7 +31,7 @@ class Pacijent
     }
 
     public static function getAll(mysqli $conn){
-        $q = "SELECT pacijent.ime, pacijent.prezime, pacijent.datumRodjenja, pacijent.email, CONCAT(doktor.ime, ' ', doktor.prezime) as doktor_punoIme FROM pacijent INNER JOIN doktor ON pacijent.doktor_id = doktor.id;";
+        $q = "SELECT pacijent.id, pacijent.ime, pacijent.prezime, pacijent.datumRodjenja, pacijent.email, pacijent.sifra, CONCAT(doktor.ime, ' ', doktor.prezime) as doktor_punoIme FROM pacijent INNER JOIN doktor ON pacijent.doktor_id = doktor.id;";
         $pacijenti= $conn->query($q);
         return $pacijenti;
     }
@@ -49,48 +49,9 @@ class Pacijent
         return $conn->query($q);
     }
 
-
-    // public static function izaberiDoktora($doktorID, mysqli $conn){
-       
-    //     $q = "INSERT INTO pacijent (doktor_id) VALUES ($doktorID)";
-    //     return $conn->query($q);
-        
-    // }
-
-    
-
-
-    public static function getPacijenti(mysqli $conn)
-    {
-        // $pacijenti = $this->pacijenti;
-        // foreach ($pacijenti as $pacijent) {
-        //     //Kontroler::prikaziPodatke($pacijent); radi i ovo, ali sam ipak htela drugacije da prikaze podatke zbog __to string metode
-        //     echo $pacijent . $pacijent->getAge();
-        //     echo "<br>";
-        // }
-
-        $pacijenti = "SELECT pacijent.id, pacijent.ime, pacijent.prezime, pacijent.datumRodjenja, pacijent.email, pacijent.sifra, pacijent.doktor_id FROM `pacijent` INNER JOIN doktor ON pacijent.id = doktor.pacijent_id;";
-        $result = $conn->query($pacijenti);
-        return $result;
+    public static function update($id, $ime, $prezime, $datumRodjenja, $email, $sifra, mysqli $conn){
+        $q = "UPDATE pacijent SET ime='$ime', prezime='$prezime', datumRodjenja='$datumRodjenja', email='$email', sifra='$sifra' WHERE id=$id";
+        return $conn->query($q);
     }
-
-    // public function getPregledi()
-    // {
-    //   $preg = $this->pregledi;
-    //   foreach($preg as $p){
-    //         echo $p;
-    //         echo "<br>";
-    //   }
-  
-    // }
-
-    // public function getRecepti()
-    // {
-    //     $recepti = $this->recepti;
-    //     foreach ($recepti as $r) {
-    //         echo $r;
-    //         echo "<br>";
-    //     }
-    // }
 
 }
