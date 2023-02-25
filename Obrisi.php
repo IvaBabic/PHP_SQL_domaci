@@ -8,10 +8,10 @@ $result = Doktor::getAll($conn);
 $pacijenti = Pacijent::getAll($conn);
 
 if (isset($_POST['submit'])) {
-    if(isset($_POST['radio']))
+    if(isset($_POST['obrisi']))
     {
 
-    $array = explode(" ",$_POST['radio']);
+    $array = explode(" ",$_POST['obrisi']);
     $id = $array[0];
     $tip = $array[1];
 
@@ -81,7 +81,7 @@ if (isset($_POST['submit'])) {
                         <td>
 
                         <form action="" method="post">
-                            <input type="radio" name="radio" value="<?php echo $row['id'] . " " . $row['tip']?>">
+                            <input type="radio" name="obrisi" value="<?php echo $row['id'] . " " . $row['tip']?>">
                             <input type="submit" name="submit" />
                         </form>
 

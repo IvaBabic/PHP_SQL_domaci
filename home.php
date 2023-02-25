@@ -7,6 +7,7 @@ require "model/Pacijent.php";
 $result = Doktor::getAll($conn);
 $pacijenti = Pacijent::getAll($conn);
 
+
 ?>
 
 
@@ -59,13 +60,6 @@ $pacijenti = Pacijent::getAll($conn);
     <button type="submit" class="btn btn-info" id="imePretraga" onclick="window.location.href = 'Pretrazi.php';" name="ime" placeholder="Pretrazi po imenu/prezimenu *" value="" >Pretrazi po imenu/prezimenu</button>
     </div>
 
-    <!-- <div class="col">
-    <button type="submit" class="btn btn-info" value="Izmeni doktora" id="Izmeni doktora" name="Izmeni doktora">
-    </div>
-
-    <div class="col">
-    <button type="submit" class="btn btn-info" value="Izmeni pacijenta" id="Izmeni pacijenta" name="Izmeni pacijenta">
-    </div> --> 
 </div>
 </div>
 
@@ -87,6 +81,8 @@ $pacijenti = Pacijent::getAll($conn);
                     <th>Datum Rodjenja</th>
                     <th>Specijalizacija</th>
                     <th>Email</th>
+                    <th>Izmeni</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -102,21 +98,29 @@ $pacijenti = Pacijent::getAll($conn);
                         <td><?php echo $row['specijalizacija'] ?></td>
                         <td><?php echo $row['email'] ?></td>
 
+                        <td>
+                        <form action="izmeni.php" method="post">
+                            <input type="radio" name="izmeni" value="<?php echo $row['id'] ?>">
+                            <input type="submit" name="submit" />
+                        </form>
+                        </td>
                     </tr>
                 <?php
                     }
                 
                 ?>
             </tbody>
-        </table>
-        </div>
+        </table>        
+    
+    </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 
  <!-- FORMA ZA PRIKAZIVANJE PACIJENTA -->
 
